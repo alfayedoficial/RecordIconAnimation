@@ -63,7 +63,7 @@ class MainActivity : ComponentActivity() {
         ){
             IconButton( modifier = Modifier
                 .size(42.dp)
-                .then(if (startRecording) Modifier.doublePulseEffect() else Modifier),
+                .then(if (startRecording) Modifier.doublePulseEffect(brush = SolidColor(RED.copy(0.32f))) else Modifier),
                 onClick = { startRecording = !startRecording }) {
                 Icon(
                     painter = painterResource(id = R.drawable.ic_map_recored),
@@ -93,27 +93,6 @@ class MainActivity : ComponentActivity() {
     }
 
 
-    @Composable
-    fun Modifier.doublePulseEffect(
-        targetScale: Float = 1.5f,
-        initialScale: Float = 1f,
-        brush: Brush = SolidColor(RED.copy(0.32f)),
-        shape: Shape = CircleShape,
-        duration: Int = 1200,
-    ): Modifier {
-        return this
-            .pulseEffect(
-                targetScale, initialScale, brush, shape,
-                animationSpec = tween(duration, easing = FastOutSlowInEasing)
-            )
-            .pulseEffect(
-                targetScale, initialScale, brush, shape,
-                animationSpec = tween(
-                    durationMillis = (duration * 0.7f).toInt(),
-                    delayMillis = (duration * 0.3f).toInt(),
-                    easing = LinearEasing
-                )
-            )
-    }
+
 }
 
